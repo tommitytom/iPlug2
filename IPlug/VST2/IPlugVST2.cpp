@@ -15,6 +15,7 @@
 #include "IGraphicsConstants.h"
 
 using namespace iplug;
+using namespace igraphics;
 
 static int AsciiToVK(int ascii) {
 #ifdef WIN32
@@ -900,7 +901,7 @@ VstIntPtr VSTCALLBACK IPlugVST2::VSTDispatcher(AEffect *pEffect, VstInt32 opCode
       int vk = VSTKeyCodeToVK(value, idx);
       int modifiers = (int)opt;
 
-      IKeyPress keyPress{ str, static_cast<int>(vk),
+      igraphics::IKeyPress keyPress{ str, static_cast<int>(vk),
                           static_cast<bool>(modifiers & MODIFIER_SHIFT),
                           static_cast<bool>(modifiers & MODIFIER_CONTROL),
                           static_cast<bool>(modifiers & MODIFIER_ALTERNATE) };
