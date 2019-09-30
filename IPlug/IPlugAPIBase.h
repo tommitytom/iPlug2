@@ -33,8 +33,9 @@
  * An IPlug API class is the base class for a particular audio plug-in API
 */
 
-struct IPlugConfig;
-struct IKeyPress;
+BEGIN_IPLUG_NAMESPACE
+
+struct Config;
 
 /** The base class of an IPlug plug-in, which interacts with the different plug-in APIs.
  *  This interface does not handle audio processing, see @IPlugProcessor  */
@@ -42,8 +43,11 @@ class IPlugAPIBase : public IPluginBase
 {
 
 public:
-  IPlugAPIBase(IPlugConfig config, EAPI plugAPI);
+  IPlugAPIBase(Config config, EAPI plugAPI);
   virtual ~IPlugAPIBase();
+
+  IPlugAPIBase(const IPlugAPIBase&) = delete;
+  IPlugAPIBase& operator=(const IPlugAPIBase&) = delete;
 
 #pragma mark - Methods you can implement/override in your plug-in class - you do not call these methods
 
@@ -229,3 +233,5 @@ protected:
   IPlugQueue<SysExData> mSysExDataFromProcessor {SYSEX_TRANSFER_SIZE}; // a queue of SYSEX data to send to the editor
   SysExData mSysexBuf;
 };
+
+END_IPLUG_NAMESPACE
